@@ -1,0 +1,75 @@
+module pixel_sort_asc (
+
+	 input clk,
+	 input   [15:0] Pixel_in1, Pixel_in2, Pixel_in3, Pixel_in4 , Pixel_in5 , Pixel_in6, Pixel_in7, Pixel_in8, Pixel_in9,
+	 output reg [15:0] Pixel_out1, Pixel_out2, Pixel_out3, Pixel_out4 , Pixel_out5 , Pixel_out6, Pixel_out7, Pixel_out8, Pixel_out9
+ 
+		
+);
+
+
+integer i, j;
+
+reg [15:0] array [1:9]; 
+reg [15:0] temp;
+reg [15:0] in1, in2, in3, in4, in5, in6, in7, in8, in9;
+ 
+
+
+always @(posedge clk)
+ begin
+     in1<=  Pixel_in1;
+	  in2<=  Pixel_in2; 
+	  in3<= 	Pixel_in3; 
+	  in4<= 	Pixel_in4;  
+	  in5<=	Pixel_in5; 
+	  in6<=	Pixel_in6; 
+	  in7<=	Pixel_in7; 
+	  in8<=	Pixel_in8; 
+	  in9<=	Pixel_in9;
+   
+ end 
+ 
+ always @(*)
+  begin
+ array[1] =  Pixel_in1; 
+ array[2] =	 Pixel_in2;
+ array[3] =  Pixel_in3;
+ array[4] =  Pixel_in4;
+ array[5] =  Pixel_in5;
+ array[6] =  Pixel_in6;
+ array[7] =  Pixel_in7;
+ array[8] =  Pixel_in8;
+ array[9] =  Pixel_in9;
+ 
+ for ( i= 9; i>0; i=i-1) begin
+		for(j=1; j<i; j=j+1) begin 
+		 if (array[j] < array[j + 1])
+          begin
+            temp = array[j];
+            array[j] = array[j + 1];
+            array[j + 1] = temp;
+				end
+				
+		   end
+ 
+		end
+ 
+ end 
+ 
+ 
+ always @(posedge clk)
+ begin
+ Pixel_out1 <= array[9];
+ Pixel_out2 <= array[8];
+ Pixel_out3 <= array[7];
+ Pixel_out4 <= array[6];
+ Pixel_out5 <= array[5];
+ Pixel_out6 <= array[4];
+ Pixel_out7 <= array[3];
+ Pixel_out8 <= array[2];
+ Pixel_out9 <= array[1];
+ end
+ 
+
+endmodule 

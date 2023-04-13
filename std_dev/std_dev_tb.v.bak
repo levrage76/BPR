@@ -1,0 +1,44 @@
+module std_dev_tb;
+    
+	 reg clk;
+	 reg reset;
+    reg  [7:0] in1,  in2,  in3,  in4, in5 ,in6;
+    reg [31:0] mean;
+    wire [31:0] std_dev;
+
+    variance #(.N_INPUT(6), .SIZE(8)) dut (
+        .clk(clk),
+		  .reset(reset),
+        .in_data ({in1,in2,in3,in4,in5, in6}),
+		  .mean(mean),
+		  .std_dev(std_dev)
+    );
+
+    always @(posedge clk) begin
+        in1 <= 46;
+        in2 <= 69;
+        in3 <= 32;
+        in4 <= 60;
+		  in5 <= 52;
+		  in6 <= 41;
+		
+		  mean <=50;
+        //in5 <= 340;
+		  ////in6 <= 45;
+		  //in7 <=367;
+		  //in8 <=256;
+    end
+
+     initial begin
+	   reset =1;
+		 #10;
+		 reset =0;
+       #10000;
+        $finish;
+    end
+
+    always begin
+        clk = 1'b0; #5;
+        clk = 1'b1; #5;
+    end
+endmodule

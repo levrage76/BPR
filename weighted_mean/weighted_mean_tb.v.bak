@@ -1,0 +1,46 @@
+module weighted_mean_tb;
+    
+	 reg clk;
+	 reg reset;
+    reg  [7:0] in1,  in2,  in3,  in4,  in5, in6, in7, in8;
+	 reg  [7:0] w1,w2,w3,w4;
+    wire [7:0] mean ;
+
+    weighted_mean #(.NUM_VALS(8), .SIZE(8)) dut (
+        .clk(clk),
+		  .reset(reset)
+        .in ({in1,in2,in3,in4}),
+		  .weight({w1,w2,w3,w4}),
+        .mean(mean)
+    );
+
+    always @(posedge clk) begin
+        in1 <= 7;
+        in2 <= 5;
+        in3 <= 8;
+        in4 <= 4;
+		  
+		  
+		  w1 <= 9;
+        w2 <= 3;
+        w3 <= 2;
+        w4 <= 1;
+        //in5 <= 340;
+		  ////in6 <= 45;
+		  //in7 <=367;
+		  //in8 <=256;
+    end
+
+     initial begin
+	   reset =1;
+		 #10;
+		 reset =0;
+       #100;
+        $finish;
+    end
+
+    always begin
+        clk = 1'b0; #5;
+        clk = 1'b1; #5;
+    end
+endmodule
