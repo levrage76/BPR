@@ -1,0 +1,33 @@
+
+module gen_val(
+    input clk,
+    input reset,
+    output reg [31:0] mean, std_dev,
+	 output reg [31:0] pixel_in
+	 );
+
+always @(posedge clk) begin
+   
+	if (reset)
+	begin
+       
+		  mean 	  <= 32'b0;
+		  std_dev  <= 32'b0;
+		  pixel_in <= 32'b0;
+		  
+    end else 
+	 
+	 begin
+     		
+			mean  	<= 
+			std_dev 	<=
+			pixel_in <=
+	
+		  count1 <= count1 + 1;
+		  count2 <= count2 + 2;
+		  count3 <= count3 + 3;
+		  count4 <= count4 + 4;
+    end
+end
+
+endmodule
